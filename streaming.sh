@@ -13,7 +13,7 @@ fi
 
 # Create env if it doesn't exist
 if ! conda env list | grep -qE "^${ENV_NAME}[[:space:]]"; then
-    echo "📦 Creating conda environment '$ENV_NAME'..."
+    echo "Creating conda environment '$ENV_NAME'..."
     if [[ -f "$ENV_YML" ]]; then
         conda env create -n "$ENV_NAME" -f "$ENV_YML"
     elif [[ -f "$REQ_TXT" ]]; then
@@ -24,32 +24,32 @@ if ! conda env list | grep -qE "^${ENV_NAME}[[:space:]]"; then
         exit 1
     fi
 else
-    echo "✅ Conda environment '$ENV_NAME' already exists."
+    echo "Conda environment '$ENV_NAME' already exists."
 fi
 
 # Install global node dependencies
 if ! command -v node &>/dev/null; then
-    echo "📦 Installing Node.js..."
+    echo "Installing Node.js..."
     brew install node
 fi
 
 if ! command -v npm &>/dev/null; then
-    echo "❌ npm not found even after Node install."
+    echo "npm not found even after Node install."
     exit 1
 fi
 
 if ! command -v ngrok &>/dev/null; then
-    echo "📦 Installing ngrok..."
+    echo "Installing ngrok..."
     brew install --cask ngrok
 fi
 
 if ! npm list -g node-media-server &>/dev/null; then
-    echo "📦 Installing node-media-server..."
+    echo "Installing node-media-server..."
     sudo npm install -g node-media-server
 fi
 
 # Launch server + ngrok using conda run
-echo "🚀 Launching node-media-server and ngrok in new terminals..."
+echo "Launching node-media-server and ngrok in new terminals..."
 
 osascript <<END
 tell application "Terminal"
@@ -66,12 +66,12 @@ end tell
 END
 
 # Extract and format RTMP URL
-echo "⏳ Waiting for ngrok to initialize..."
+echo "Waiting for ngrok to initialize..."
 until curl -s http://127.0.0.1:4040/api/tunnels > /dev/null; do sleep 1; done
 
 RAW_TCP_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | grep -Eo 'tcp://[^"]+')
 HOST_PORT=${RAW_TCP_URL#tcp://}
 RTMP_URL="rtmp://${HOST_PORT}/live"
 echo "$RTMP_URL" | pbcopy
-echo "✅ RTMP URL copied to clipboard: $RTMP_URL"
-echo "📌 Paste this into Zoom's Custom Streaming URL field."
+echo "RTMP URL copied to clipboard: $RTMP_URL"
+echo "Paste this into Zoom's Custom Streaming URL field."
