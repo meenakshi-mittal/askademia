@@ -40,7 +40,7 @@ from azure.search.documents.models import (
 )
 
 tokenizer = tiktoken.get_encoding("cl100k_base")
-load_dotenv('./keys-2.env')
+load_dotenv('./keys.env')
 client = AzureOpenAI(
          azure_endpoint = os.getenv('azure_endpoint'), 
          api_key=os.getenv('OPENAI_API_KEY'),  
