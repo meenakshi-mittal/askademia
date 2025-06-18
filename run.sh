@@ -11,10 +11,10 @@ if [ -n "$PID" ]; then
   kill -9 $PID
 fi
 
-# Open new terminal to launch browser
+# Open new terminal, open the link, then close the terminal
 osascript <<EOF
 tell application "Terminal"
-    do script "sleep 3; open http://127.0.0.1:5000"
+    do script "sleep 3; open http://127.0.0.1:5000; exit"
 end tell
 EOF
 
