@@ -7,7 +7,7 @@ REQ_TXT="requirements.txt"
 echo "🔍 Checking Conda..."
 
 if ! command -v conda &>/dev/null; then
-    echo "❌ Conda not found. Install Miniconda or Anaconda."
+    echo "Conda not found. Install Miniconda or Anaconda."
     exit 1
 fi
 
@@ -50,6 +50,8 @@ fi
 
 # Launch server + ngrok using conda run
 echo "Launching node-media-server and ngrok in new terminals..."
+
+lsof -ti:8000 | xargs kill -9
 
 osascript <<END
 tell application "Terminal"
