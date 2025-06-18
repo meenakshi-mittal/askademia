@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Interface</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Livestream video section -->
+        <h1>Askademia</h1>
+        <div class="video-section">
+            
+            <video id="videoElement" controls autoplay></video>
+        </div>
+    
+        <!-- Chat interface section -->
+        <div class="chat-section">
+            <div class="chat-history">
+                <!-- Loop through the conversation history -->
+                {% for message in conversation %}
+                <div class="message {% if message.user == 'You' %}user{% else %}bot{% endif %}">
+                    {% if message.user == 'You' %}
+                        <em class="user-label">{{ message.user }}:</em>
+                        <p>{{ message.text }}</p>
+                    {% else %}
+                        <em class="bot-label">{{ message.user }}:</em>
+                        <div class="bot-message-container">
+                            <p class="bot-text">{{ message.text }}</p>
+                            <button class="copy-btn" onclick="copyToClipboard(this)">📋</button>
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <form method="POST">
+                <input type="text" id="user_input" name="user_input" placeholder="Ask a question..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+    <script>
+        if (flvjs.isSupported()) {
+            const videoElement = document.getElementById('videoElement');
+            const flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: 'http://localhost:8000/live/my_stream.flv'
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            flvPlayer.play();
+        } else {
+            alert('Your browser does not support flv.js');
+        }
+    </script>
+
+    <script>
+    function copyToClipboard(button) {
+        const textElement = button.previousElementSibling;
+        const text = textElement.innerText || textElement.textContent;
+
+        navigator.clipboard.writeText(text).then(() => {
+            button.textContent = "✅";
+            setTimeout(() => button.textContent = "📋", 1500);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+        });
+    }
+    </script>
+
+</body>
+</html>
