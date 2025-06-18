@@ -51,7 +51,11 @@ fi
 # Launch server + ngrok using conda run
 echo "Launching node-media-server and ngrok in new terminals..."
 
-lsof -ti:8000 | xargs kill -9
+# Kill anything using port 8000 (Node-Media-Server)
+lsof -ti:8000 | xargs kill -9 2>/dev/null || true
+
+# Kill any existing ngrok processes
+pkill -f ngrok || true
 
 osascript <<END
 tell application "Terminal"
