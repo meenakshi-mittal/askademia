@@ -53,7 +53,7 @@ echo "Launching node-media-server and ngrok in new terminals..."
 
 osascript <<END
 tell application "Terminal"
-    do script "conda run -n $ENV_NAME node-media-server"
+    do script "node-media-server"
 end tell
 END
 
