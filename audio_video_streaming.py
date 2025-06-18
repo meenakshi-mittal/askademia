@@ -429,7 +429,7 @@ def user_input_thread(user_input=None):
 
     """
 
-    print('=' * 50)
+    #print('=' * 50)
 
     if not user_input: #initially encourages the user to ask a question
         question = input("Enter your question (or 'new' to start a new conversation, 'exit' to quit): ").strip()
@@ -471,7 +471,7 @@ def user_input_thread(user_input=None):
         {"role": "user", "content": f"Context: {formatted_prompt}\n\nQuestion: {question}"},
     ]
 
-    print(formatted_prompt)
+    #print(formatted_prompt)
 
     response_json['GPT Response'] = generate_gpt_response(prompt)
 
