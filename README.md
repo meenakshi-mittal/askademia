@@ -13,7 +13,7 @@ cd <repo-directory>
 
 ---
 
-## 1. Set Up Python Environment
+## 2. Set Up Python Environment
 
 You can use `venv` or `conda` to create a virtual environment and install dependencies.
 
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ---
 
-## 2. Install ngrok
+## 3. Install ngrok
 
 Ngrok allows you to expose your local server to the internet.
 Sign up for free:
@@ -57,7 +57,7 @@ ngrok config add-authtoken <your_token>
 
 ---
 
-## 3. Install Node.js and `node-media-server`
+## 4. Install Node.js and `node-media-server`
 
 Askademia uses `node-media-server` to create an RTMP server.
 
@@ -79,13 +79,13 @@ npm install -g node-media-server
 
 ---
 
-## 4. Add Environment Keys
+## 5. Add Environment Keys
 
 Obtain the `keys.env` file from Meenakshi and place it in the **root directory** of the cloned repository.
 
 ---
 
-## 5. Set Up the Slido Chrome Extension
+## 6. Set Up the Slido Chrome Extension
 
 1. Open Chrome and go to `chrome://extensions/`
 2. Enable "Developer mode" in the top-right corner.
@@ -95,7 +95,7 @@ Obtain the `keys.env` file from Meenakshi and place it in the **root directory**
 
 ---
 
-## 6. Set Up Zoom Streaming
+## 7. Set Up Zoom Streaming
 
 ### Enable Custom Streaming on Zoom
 
@@ -103,7 +103,7 @@ Follow [this Zoom guide](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm
 
 ---
 
-## 7. Start Streaming
+## 8. Start Streaming
 
 ### Before the lecture, run:
 
@@ -144,7 +144,7 @@ http://localhost:8000/admin/streams
 
 ---
 
-## 8. Start the System
+## 9. Start the System
 
 Once streaming is live, activate your environment and run:
 
