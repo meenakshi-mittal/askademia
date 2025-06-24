@@ -1,52 +1,52 @@
 #!/bin/bash
 
-ENV_NAME="askademia"
-ENV_YML="environment.yml"
-REQ_TXT="requirements.txt"
+#ENV_NAME="askademia"
+#ENV_YML="environment.yml"
+#REQ_TXT="requirements.txt"
 
-echo "🔍 Checking Conda..."
-
-if ! command -v conda &>/dev/null; then
-    echo "Conda not found. Install Miniconda or Anaconda."
-    exit 1
-fi
-
-# Create env if it doesn't exist
-if ! conda env list | grep -qE "^${ENV_NAME}[[:space:]]"; then
-    echo "Creating conda environment '$ENV_NAME'..."
-    if [[ -f "$ENV_YML" ]]; then
-        conda env create -n "$ENV_NAME" -f "$ENV_YML"
-    elif [[ -f "$REQ_TXT" ]]; then
-        conda create -n "$ENV_NAME" python=3.11 -y
-        conda run -n "$ENV_NAME" pip install -r "$REQ_TXT"
-    else
-        echo "❌ No environment.yml or requirements.txt found."
-        exit 1
-    fi
-else
-    echo "Conda environment '$ENV_NAME' already exists."
-fi
-
-# Install global node dependencies
-if ! command -v node &>/dev/null; then
-    echo "Installing Node.js..."
-    brew install node
-fi
-
-if ! command -v npm &>/dev/null; then
-    echo "npm not found even after Node install."
-    exit 1
-fi
-
-if ! command -v ngrok &>/dev/null; then
-    echo "Installing ngrok..."
-    brew install --cask ngrok
-fi
-
-if ! npm list -g node-media-server &>/dev/null; then
-    echo "Installing node-media-server..."
-    sudo npm install -g node-media-server
-fi
+#echo "🔍 Checking Conda..."
+#
+#if ! command -v conda &>/dev/null; then
+#    echo "Conda not found. Install Miniconda or Anaconda."
+#    exit 1
+#fi
+#
+## Create env if it doesn't exist
+#if ! conda env list | grep -qE "^${ENV_NAME}[[:space:]]"; then
+#    echo "Creating conda environment '$ENV_NAME'..."
+#    if [[ -f "$ENV_YML" ]]; then
+#        conda env create -n "$ENV_NAME" -f "$ENV_YML"
+#    elif [[ -f "$REQ_TXT" ]]; then
+#        conda create -n "$ENV_NAME" python=3.11 -y
+#        conda run -n "$ENV_NAME" pip install -r "$REQ_TXT"
+#    else
+#        echo "❌ No environment.yml or requirements.txt found."
+#        exit 1
+#    fi
+#else
+#    echo "Conda environment '$ENV_NAME' already exists."
+#fi
+#
+## Install global node dependencies
+#if ! command -v node &>/dev/null; then
+#    echo "Installing Node.js..."
+#    brew install node
+#fi
+#
+#if ! command -v npm &>/dev/null; then
+#    echo "npm not found even after Node install."
+#    exit 1
+#fi
+#
+#if ! command -v ngrok &>/dev/null; then
+#    echo "Installing ngrok..."
+#    brew install --cask ngrok
+#fi
+#
+#if ! npm list -g node-media-server &>/dev/null; then
+#    echo "Installing node-media-server..."
+#    sudo npm install -g node-media-server
+#fi
 
 # Launch server + ngrok using conda run
 echo "Launching node-media-server and ngrok in new terminals..."
