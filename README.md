@@ -13,13 +13,79 @@ cd <repo-directory>
 
 ---
 
-## 2. Add Environment Keys
+## 📦 1. Set Up Python Environment
+
+You can use `venv` or `conda` to create a virtual environment and install dependencies.
+
+### Option A: Using `venv`
+
+```bash
+cd path/to/askademia
+
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate   # For macOS/Linux
+venv\Scripts\activate    # For Windows
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Option B: Using `conda`
+
+```bash
+conda create -n askademia python=3.11
+conda activate askademia
+pip install -r requirements.txt
+```
+
+---
+
+## 2. Install ngrok
+
+Ngrok allows you to expose your local server to the internet.
+Sign up for free:
+
+- [Download ngrok](https://ngrok.com/download)
+- [Get your auth token](https://dashboard.ngrok.com/get-started/your-authtoken)
+
+After installing:
+
+```bash
+ngrok config add-authtoken <your_token>
+```
+
+---
+
+## 3. Install Node.js and `node-media-server`
+
+Askademia uses `node-media-server` to create an RTMP server.
+
+### Install Node.js
+
+- **macOS (with Homebrew):**
+  ```bash
+  brew install node
+  ```
+
+- **Windows/macOS/Linux (manual):**
+  Download from [https://nodejs.org](https://nodejs.org)
+
+### Install node-media-server
+
+```bash
+npm install -g node-media-server
+```
+
+---
+
+## 4. Add Environment Keys
 
 Obtain the `keys.env` file from Meenakshi and place it in the **root directory** of the cloned repository.
 
 ---
 
-## 3. Set Up the Slido Chrome Extension
+## 5. Set Up the Slido Chrome Extension
 
 1. Open Chrome and go to `chrome://extensions/`
 2. Enable "Developer mode" in the top-right corner.
@@ -29,7 +95,7 @@ Obtain the `keys.env` file from Meenakshi and place it in the **root directory**
 
 ---
 
-## 4. Set Up Zoom Streaming
+## 6. Set Up Zoom Streaming
 
 ### Enable Custom Streaming on Zoom
 
@@ -37,7 +103,7 @@ Follow [this Zoom guide](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm
 
 ---
 
-## 5. Start Streaming
+## 7. Start Streaming
 
 ### Before the lecture, run:
 
@@ -78,9 +144,9 @@ http://localhost:8000/admin/streams
 
 ---
 
-## 6. Start the System
+## 8. Start the System
 
-Once streaming is live, run:
+Once streaming is live, activate your environment and run:
 
 ```bash
 bash run.sh
