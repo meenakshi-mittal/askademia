@@ -13,7 +13,7 @@ cd <repo-directory>
 
 ---
 
-## 📦 1. Set Up Python Environment
+## 1. Set Up Python Environment
 
 You can use `venv` or `conda` to create a virtual environment and install dependencies.
 
