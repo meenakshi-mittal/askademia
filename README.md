@@ -7,7 +7,7 @@ This README provides step-by-step instructions to get Askademia up and running.
 ## 1. Clone the Repository
 
 ```bash
-git clone [<repo-url>](https://github.com/meenakshi-mittal/askademia.git)
+git clone https://github.com/meenakshi-mittal/askademia.git
 cd askademia
 ```
 
