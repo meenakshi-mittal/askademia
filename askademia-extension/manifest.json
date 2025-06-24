@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Askademia",
+  "version": "1.0",
+  "description": "Sends Slido questions through Askademia.",
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Askademia",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

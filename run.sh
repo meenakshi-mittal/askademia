@@ -12,11 +12,11 @@ if [ -n "$PID" ]; then
 fi
 
 # Open new terminal, open the link, then close the terminal
-osascript <<EOF
-tell application "Terminal"
-    do script "sleep 3; open http://127.0.0.1:5000; exit"
-end tell
-EOF
+#osascript <<EOF
+#tell application "Terminal"
+#    do script "sleep 3; open http://127.0.0.1:5000; exit"
+#end tell
+#EOF
 
 # Run app.py in current terminal
 python app.py
