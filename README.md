@@ -77,6 +77,12 @@ Askademia uses `node-media-server` to create an RTMP server.
 npm install -g node-media-server
 ```
 
+if permission is denied, try:
+
+```bash
+sudo npm install -g node-media-server
+```
+
 ---
 
 ## 5. Add Environment Keys
