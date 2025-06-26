@@ -17,6 +17,7 @@ def chat():
         user_input = data.get("question")
         if user_input:
             response = user_input_thread(user_input)
+            print(response)
             return jsonify({"response": response['GPT Response']})
         return jsonify({"response": "No input received."}), 400
 
@@ -26,6 +27,7 @@ def chat():
         if user_input:
             conversation.append({"user": "You", "text": user_input})
             response = user_input_thread(user_input)
+            print(response)
             conversation.append({"user": "Askademia", "text": response['GPT Response']})
 
     return render_template("index.html", conversation=conversation)
