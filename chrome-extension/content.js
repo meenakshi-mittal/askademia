@@ -1,8 +1,10 @@
 function injectAskademiaButton() {
     const replySidebar = document.querySelector('div[aria-label="Reply"]');
+    console.log("Reply Sidebar:", replySidebar);
     if (!replySidebar) return;
 
     const questionSpan = replySidebar.querySelector('span[class^="questionText"]');
+    console.log("Question Span:", questionSpan);
     if (!questionSpan || questionSpan.querySelector(".askademia-btn")) return;
 
     const button = document.createElement("button");
@@ -27,6 +29,7 @@ function injectAskademiaButton() {
         const answer = data.response;
 
         const replyBox = document.querySelector('textarea[placeholder="Write your reply..."]');
+        console.log("Reply Box:", replyBox);
         if (replyBox) {
             replyBox.value = answer;
             replyBox.dispatchEvent(new Event('input', { bubbles: true }));
