@@ -7,6 +7,10 @@ function injectAskademiaButton() {
     console.log("Question Span:", questionSpan);
     if (!questionSpan || questionSpan.querySelector(".askademia-btn")) return;
 
+    const replyBox = document.querySelector('textarea[placeholder="Write your reply..."]');
+    console.log("Reply Box:", replyBox);
+    if (!replyBox) return;
+
     const button = document.createElement("button");
     button.innerText = "Askademia 💡";
     button.className = "askademia-btn";
@@ -25,14 +29,18 @@ function injectAskademiaButton() {
             body: JSON.stringify({ question })
         });
 
-        const data = await response.json();
-        const answer = data.response;
-
-        const replyBox = document.querySelector('textarea[placeholder="Write your reply..."]');
-        console.log("Reply Box:", replyBox);
-        if (replyBox) {
-            replyBox.value = answer;
-            replyBox.dispatchEvent(new Event('input', { bubbles: true }));
+        try {
+            const data = await response.json();
+            const answer = data.response;
+        
+            if (replyBox) {
+                replyBox.value = answer;
+                replyBox.dispatchEvent(new Event('input', { bubbles: true }));
+            } else {
+                console.error("Reply box not found");
+            }
+        } catch (e) {
+            console.error("Fetch or JSON parse error", e);
         }
     };
 
