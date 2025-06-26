@@ -72,12 +72,27 @@ end tell
 END
 
 # Extract and format RTMP URL
+# Wait for ngrok tunnel to appear
 echo "Waiting for ngrok to initialize..."
-until curl -s http://127.0.0.1:4040/api/tunnels > /dev/null; do sleep 1; done
+MAX_RETRIES=10
+RETRIES=0
 
-RAW_TCP_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | grep -Eo 'tcp://[^"]+')
+while true; do
+    RAW_TCP_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | grep -Eo 'tcp://[^"]+')
+    if [ -n "$RAW_TCP_URL" ]; then
+        break
+    fi
+    RETRIES=$((RETRIES+1))
+    if [ $RETRIES -ge $MAX_RETRIES ]; then
+        echo "❌ ngrok tunnel not found. Is ngrok running in TCP mode?"
+        exit 1
+    fi
+    sleep 1
+done
+
 HOST_PORT=${RAW_TCP_URL#tcp://}
 RTMP_URL="rtmp://${HOST_PORT}/live"
+
 echo "$RTMP_URL" | pbcopy
 echo "RTMP URL copied to clipboard: $RTMP_URL"
 echo ""
